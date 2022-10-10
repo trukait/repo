@@ -51,5 +51,7 @@ jobs:
         id: generate_number
         run:  echo "::set-output name=random_number::$(($RANDOM % 2))"
       - name: Pass or fail
-        if: ${{ steps.generate_number.outputs.random_number == 0 }}
-        run: echo "😊😊😊😊😊😊success excute shell😊😊😊😊😊😊"
+        #if: ${{ steps.generate_number.outputs.random_number == 0 }}
+        #run: echo "😊😊😊😊😊😊success excute shell😊😊😊😊😊😊"
+        run: |
+          if [[ ${{ steps.generate_number.outputs.random_number }} == 0 ]]; then exit 0; else exit 1; fi
