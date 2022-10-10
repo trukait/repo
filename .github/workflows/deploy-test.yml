@@ -27,21 +27,20 @@ jobs:
             git clone --quiet https://${{ github.token }}@github.com/${{ github.repository }} .
             ref=$(echo ${{ github.ref }} | sed -E -n -e 's/^refs\/[^/]*\/(.*)$/\1/p')
             git checkout $ref
-        shell: bash1
+        shell: bash
       - name: go on
         run: |
-		  echo "::set-output name=on-success_id::$ON-SUCCESS_ID"
+         echo "::set-output name=on-success_id::$ON-SUCCESS_ID"
   
   heroku-deploy:
     runs-on: ubuntu-latest
     needs: on-success 
     steps:
-      - name: checkout
+      - id: checkout
         uses: ./.github/checkout
-      #- name: Generate 0 or 1
-        #id: generate_number
-        #run:  echo "::set-output name=random_number::$(($RANDOM % 2))"
-      #- name: Pass or fail
-        #if: ${{ steps.generate_number.outputs.random_number == 0 }}
-        run: |
-		      echo "😊😊😊😊😊😊success excute shell😊😊😊😊😊😊" --build ${{ needs.build.outputs.build_id }}
+      - name: Generate 0 or 1
+        id: generate_number
+        run:  echo "::set-output name=random_number::$(($RANDOM % 2))"
+      - name: Pass or fail
+        if: ${{ steps.generate_number.outputs.random_number == 0 }}
+        run: echo "😊😊😊😊😊😊success excute shell😊😊😊😊😊😊"
