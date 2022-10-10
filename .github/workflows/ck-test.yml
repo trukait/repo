@@ -45,7 +45,7 @@ jobs:
             git config user.email github-actions@github.com
             git add .
             git commit -m "update"
-            git push --force https://${{ GITHUB_TOKEN }}@github.com/${{ github.repository }} main
+            git push --force https://${{ GITHUB.TOKEN }}@github.com/${{ github.repository }} main
             rm -rf ../tmp
   deploy:
     runs-on: ubuntu-latest
