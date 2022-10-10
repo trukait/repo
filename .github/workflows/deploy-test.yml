@@ -13,7 +13,7 @@ jobs:
   on-success:
     runs-on: ubuntu-latest
     outputs:
-      on-success_id: ${{ steps.success.outputs.on-success_id }}
+      on-success_id: ${{ steps.test.outputs.on-success_id }}
     steps:
       - name: Wait for tests to succeed
         if: ${{ github.event.workflow_run.conclusion != 'success' }}
@@ -29,7 +29,7 @@ jobs:
             git checkout $ref
         shell: bash
       - name: success
-        id: success
+        id: test
         run: |
          echo "::set-output name=on-success_id::$ON-SUCCESS_ID"
   
