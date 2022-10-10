@@ -28,7 +28,7 @@ jobs:
             ref=$(echo ${{ github.ref }} | sed -E -n -e 's/^refs\/[^/]*\/(.*)$/\1/p')
             git checkout $ref
         shell: bash
-      - name: go on
+      - name: success
         run: |
          echo "::set-output name=on-success_id::$ON-SUCCESS_ID"
   
